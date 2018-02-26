@@ -11,6 +11,9 @@ package dstack_pointers is
    procedure push(s: out stack; e: in elem);
    function is_empty(s: in stack) return boolean;
    
+   bad_use: exception;
+   overflow: exception;
+   
 private
    type cell;
    type pcell is access cell;

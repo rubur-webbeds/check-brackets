@@ -20,9 +20,21 @@ package body dstack_pointers is
       
    exception
          
-         --throw exception
+         when Constraint_Error => bad_use;
       
    end pop;
+   
+   function top(s: in stack) return elem is
+   begin
+      
+      return s.top.e;
+      
+   exception
+         
+      when Constraint_Error => bad_use;
+         
+   end top;
+   
    
    
 
