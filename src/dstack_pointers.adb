@@ -20,7 +20,7 @@ package body dstack_pointers is
       
    exception
          
-         when Constraint_Error => bad_use;
+         when Constraint_Error => raise bad_use;
       
    end pop;
    
@@ -31,11 +31,31 @@ package body dstack_pointers is
       
    exception
          
-      when Constraint_Error => bad_use;
+      when Constraint_Error => raise bad_use;
          
    end top;
    
+   procedure push(s: out stack; e: in elem) is
+      
+      r: pcell;
+      
+   begin
+      
+      r := new cell'(e, s.top);
+      s.top := r; 
+      
+   exception
+         
+         when Storage_Error => raise overflow;
+      
+   end push;
    
+   function is_empty(s: in stack) return boolean is
+   begin
+      
+      return s.top = null;
+      
+   end is_empty;
+  
    
-
 end dstack_pointers;
